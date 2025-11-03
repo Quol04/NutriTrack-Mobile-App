@@ -1,0 +1,133 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { TextInput, Button } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+export default function LoginScreen({ navigation }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      {/* Logo */}
+      <View style={styles.logoContainer}>
+        <Text style={styles.logoSymbol}>⧉</Text>
+        <Text style={styles.logoText}>NutriTrack</Text>
+      </View>
+
+      {/* Input Fields */}
+      <View style={styles.inputContainer}>
+        <TextInput
+          label="Email or Phone Number"
+          mode="outlined"
+          value={email}
+          onChangeText={setEmail}
+          placeholder="Johndoe@gmail.com"
+          left={<TextInput.Icon icon="email-outline" />}
+          style={styles.input}
+          theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
+        />
+
+        <TextInput
+          label="Password"
+          mode="outlined"
+          value={password}
+          onChangeText={setPassword}
+          placeholder="********"
+          secureTextEntry={!showPassword}
+          left={<TextInput.Icon icon="lock-outline" />}
+          right={
+            <TextInput.Icon
+              icon={showPassword ? "eye-off-outline" : "eye-outline"}
+              onPress={() => setShowPassword(!showPassword)}
+            />
+          }
+          style={styles.input}
+          theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
+        />
+
+        <TouchableOpacity>
+          <Text style={styles.resetText}>Forgot password? Reset here</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Login Button */}
+      <Button
+        mode="contained"
+        onPress={() => console.log("Login pressed")}
+        style={styles.loginButton}
+        labelStyle={{ color: "#000", fontSize: 16 }}
+        buttonColor="#FFEFE7"
+      >
+        Login
+      </Button>
+
+      {/* Sign Up Link */}
+      <Text style={styles.signupText}>
+        Already have an Account?{" "}
+        <Text
+          style={styles.signupLink}
+          onPress={() => navigation.navigate("Signup")}
+        >
+          Sign up here
+        </Text>
+      </Text>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#000",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 25,
+  },
+  logoContainer: {
+    alignItems: "center",
+    marginBottom: 50,
+  },
+  logoSymbol: {
+    fontSize: 40,
+    color: "#FFEFE7",
+  },
+  logoText: {
+    color: "#FFEFE7",
+    fontSize: 28,
+    fontWeight: "600",
+  },
+  inputContainer: {
+    width: "100%",
+    marginBottom: 30,
+  },
+  input: {
+    backgroundColor: "transparent",
+    marginBottom: 15,
+  },
+  resetText: {
+    color: "#ccc",
+    textAlign: "right",
+    fontSize: 13,
+  },
+  loginButton: {
+    width: "100%",
+    borderRadius: 10,
+    paddingVertical: 5,
+    marginBottom: 20,
+  },
+  signupText: {
+    color: "#fff",
+    fontSize: 14,
+  },
+  signupLink: {
+    color: "#FFEFE7",
+    textDecorationLine: "underline",
+  },
+});
