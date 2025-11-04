@@ -1,17 +1,19 @@
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-  View,
-  Text,
   StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from "react-native";
-import { TextInput, Button } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -73,7 +75,7 @@ export default function LoginScreen({ navigation }) {
         Already have an Account?{" "}
         <Text
           style={styles.signupLink}
-          onPress={() => navigation.navigate("Signup")}
+          onPress={() => router.push('/auth/signUpScreen')}
         >
           Sign up here
         </Text>

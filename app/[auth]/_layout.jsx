@@ -14,20 +14,14 @@
 //   );
 // }
 
+import { Stack } from "expo-router";
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import LoginScreen from "./loginScreen";
 
-const Stack = createStackNavigator();
-
-export default function App() {
+export default function AuthLayout() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Signup" component={SignupScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="loginScreen" options={{ headerShown: false }} />
+      <Stack.Screen name="signUpScreen" options={{ headerShown: false }} />
+    </Stack>
   );
 }

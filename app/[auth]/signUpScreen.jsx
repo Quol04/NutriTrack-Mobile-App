@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import React, { useState } from "react";
 import {
   View,
@@ -144,7 +145,7 @@ export default function SignupScreen({ navigation }) {
         Already have an Account?{" "}
         <Text
           style={styles.loginLink}
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => router.push('/auth/loginScreen')}
         >
           Sign in here
         </Text>

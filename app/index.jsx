@@ -30,7 +30,7 @@ export default function Index() {
   }
 
   const handleLogin = () => {
-    router.push('/loginScreen');
+    router.push('/auth/loginScreen');
   }
 
 

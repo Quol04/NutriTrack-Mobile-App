@@ -4,7 +4,6 @@ import {
   Text,
   ImageBackground,
   TouchableOpacity,
-  StyleSheet,
   Dimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -12,6 +11,8 @@ import { FlatList } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { slides } from "@/constants/";
 import {styles} from "@/styles/";
+import { useRouter } from "expo-router";
+
 
 
 export default function OnboardingScreen({ navigation }) {
@@ -19,6 +20,8 @@ export default function OnboardingScreen({ navigation }) {
   const flatListRef = useRef(null);
   
   const { width, height } = Dimensions.get("window");
+
+  const router = useRouter();
 
   const handleScroll = (event) => {
     const index = Math.round(event.nativeEvent.contentOffset.x / width);
@@ -29,6 +32,7 @@ export default function OnboardingScreen({ navigation }) {
     if (currentIndex < slides.length - 1) {
       flatListRef.current.scrollToIndex({ index: currentIndex + 1 });
     } else {
+      router.push('/auth/loginScreen');
       // Navigate to your main app screen here
       console.log("Onboarding finished");
     }
