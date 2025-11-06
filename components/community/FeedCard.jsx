@@ -1,0 +1,43 @@
+import React from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+export default function FeedCard({ item }) {
+  return (
+    <TouchableOpacity style={styles.card}>
+      <Image source={{ uri: item.image }} style={styles.image} />
+      {item.video && (
+        <View style={styles.playOverlay}>
+          <Ionicons name="play-circle" size={36} color="#fff" />
+        </View>
+      )}
+      <View style={styles.overlay}>
+        <Text style={styles.title} numberOfLines={2}>
+          {item.title}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+const styles = StyleSheet.create({
+  card: {
+    width: 180,
+    height: 120,
+    borderRadius: 14,
+    marginRight: 14,
+    overflow: "hidden",
+    backgroundColor: "#ddd",
+  },
+  image: { width: "100%", height: "100%" },
+  playOverlay: { position: "absolute", top: "38%", left: "38%" },
+  overlay: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 8,
+    backgroundColor: "rgba(0,0,0,0.35)",
+  },
+  title: { color: "#fff", fontSize: 14, fontWeight: "600" },
+});
