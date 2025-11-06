@@ -5,6 +5,10 @@ import {
   Text,
   TouchableOpacity,
   View,
+  KeyboardAvoidingView,
+  Keyboard,
+  Platform,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -18,70 +22,78 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Logo */}
-      <View style={styles.logoContainer}>
-        <Text style={styles.logoSymbol}>⧉</Text>
-        <Text style={styles.logoText}>NutriTrack</Text>
-      </View>
+      <KeyboardAvoidingView 
+          behavior={ Platform.OS === 'ios' ? 'padding' : 'height' } 
+          style={{ flex: 1, width: '100%' }}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            {/* Logo */}
+           <View style={styles.inner}>
+            <View style={styles.logoContainer}>
+              <Text style={styles.logoSymbol}>⧉</Text>
+              <Text style={styles.logoText}>NutriTrack</Text>
+            </View>
 
-      {/* Input Fields */}
-      <View style={styles.inputContainer}>
-        <TextInput
-          label="Email or Phone Number"
-          mode="outlined"
-          value={email}
-          onChangeText={setEmail}
-          placeholder="Johndoe@gmail.com"
-          left={<TextInput.Icon icon="email-outline" />}
-          style={styles.input}
-          theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
-        />
+            {/* Input Fields */}
+            <View style={styles.inputContainer}>
+              <TextInput
+                label="Email or Phone Number"
+                mode="outlined"
+                value={email}
+                onChangeText={setEmail}
+                placeholder="Johndoe@gmail.com"
+                left={<TextInput.Icon icon="email-outline" />}
+                style={styles.input}
+                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
+              />
 
-        <TextInput
-          label="Password"
-          mode="outlined"
-          value={password}
-          onChangeText={setPassword}
-          placeholder="********"
-          secureTextEntry={!showPassword}
-          left={<TextInput.Icon icon="lock-outline" />}
-          right={
-            <TextInput.Icon
-              icon={showPassword ? "eye-off-outline" : "eye-outline"}
-              onPress={() => setShowPassword(!showPassword)}
-            />
-          }
-          style={styles.input}
-          theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
-        />
+              <TextInput
+                label="Password"
+                mode="outlined"
+                value={password}
+                onChangeText={setPassword}
+                placeholder="********"
+                secureTextEntry={!showPassword}
+                left={<TextInput.Icon icon="lock-outline" />}
+                right={
+                  <TextInput.Icon
+                    icon={showPassword ? "eye-off-outline" : "eye-outline"}
+                    onPress={() => setShowPassword(!showPassword)}
+                  />
+                }
+                style={styles.input}
+                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
+              />
 
-        <TouchableOpacity>
-          <Text style={styles.resetText}>Forgot password? Reset here</Text>
-        </TouchableOpacity>
-      </View>
+              <TouchableOpacity>
+                <Text style={styles.resetText}>Forgot password? Reset here</Text>
+              </TouchableOpacity>
+            </View>
 
-      {/* Login Button */}
-     
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={() => {
-          // replace so user can't go back to the login screen after signing in
-          router.push('/(home)');
-        }}
-      >
-        <Text style={styles.loginButtonText}>Log In</Text>
-      </TouchableOpacity>
+            {/* Login Button */}
+          
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={() => {
+                // replace so user can't go back to the login screen after signing in
+                router.push('/(home)');
+              }}
+            >
+              <Text style={styles.loginButtonText}>Log In</Text>
+            </TouchableOpacity>
 
-      {/* Sign Up Link */}
-      <Text style={styles.signupText}>
-        Already have an Account?{" "}
-        <Text
-          style={styles.signupLink}
-          onPress={() => router.push('/(auth)/signUp')}
-        >
-          Sign up here
-        </Text>
-      </Text>
+            {/* Sign Up Link */}
+            <Text style={styles.signupText}>
+              Already have an Account?{" "}
+              <Text
+                style={styles.signupLink}
+                onPress={() => router.push('/(auth)/signUp')}
+              >
+                Sign up here
+              </Text>
+            </Text>
+            </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -93,6 +105,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 25,
+  },
+  inner: {
+    flex: 1,
+    justifyContent: "center",
   },
   logoContainer: {
     alignItems: "center",

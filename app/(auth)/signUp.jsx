@@ -6,6 +6,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  KeyboardAvoidingView,
+  Keyboard,
+  Platform,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -48,108 +52,116 @@ export default function SignupScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Logo */}
-      <View style={styles.logoContainer}>
-        <Text style={styles.logoSymbol}>⧉</Text>
-        <Text style={styles.logoText}>NutriTrack</Text>
-      </View>
+      <KeyboardAvoidingView 
+          behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1, width: "100%" }}>
+       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.inner}>
+            <View style={styles.logoContainer}>
+              <Text style={styles.logoSymbol}>⧉</Text>
+              <Text style={styles.logoText}>NutriTrack</Text>
+            </View>
 
-      {/* Input Fields */}
-      <View style={styles.inputContainer}>
-        {/* Username */}
-        <TextInput
-          label="Username"
-          mode="outlined"
-          value={username}
-          onChangeText={setUsername}
-          placeholder="Johndoe"
-          left={<TextInput.Icon icon="account-outline" />}
-          style={styles.input}
-          theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
-        />
-        {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
+            {/* Input Fields */}
+            <View style={styles.inputContainer}>
+              {/* Username */}
+              <TextInput
+                label="Username"
+                mode="outlined"
+                value={username}
+                onChangeText={setUsername}
+                placeholder="Johndoe"
+                left={<TextInput.Icon icon="account-outline" />}
+                style={styles.input}
+                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
+              />
+              {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
 
-        {/* Email */}
-        <TextInput
-          label="Email or Phone Number"
-          mode="outlined"
-          value={email}
-          onChangeText={setEmail}
-          placeholder="Johndoe@gmail.com"
-          left={<TextInput.Icon icon="email-outline" />}
-          style={styles.input}
-          theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
-        />
-        {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
+              {/* Email */}
+              <TextInput
+                label="Email or Phone Number"
+                mode="outlined"
+                value={email}
+                onChangeText={setEmail}
+                placeholder="Johndoe@gmail.com"
+                left={<TextInput.Icon icon="email-outline" />}
+                style={styles.input}
+                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
+              />
+              {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
 
-        {/* Password */}
-        <TextInput
-          label="Password"
-          mode="outlined"
-          value={password}
-          onChangeText={setPassword}
-          placeholder="********"
-          secureTextEntry={!showPassword}
-          left={<TextInput.Icon icon="lock-outline" />}
-          right={
-            <TextInput.Icon
-              icon={showPassword ? "eye-off-outline" : "eye-outline"}
-              onPress={() => setShowPassword(!showPassword)}
-            />
-          }
-          style={styles.input}
-          theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
-        />
-        {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+              {/* Password */}
+              <TextInput
+                label="Password"
+                mode="outlined"
+                value={password}
+                onChangeText={setPassword}
+                placeholder="********"
+                secureTextEntry={!showPassword}
+                left={<TextInput.Icon icon="lock-outline" />}
+                right={
+                  <TextInput.Icon
+                    icon={showPassword ? "eye-off-outline" : "eye-outline"}
+                    onPress={() => setShowPassword(!showPassword)}
+                  />
+                }
+                style={styles.input}
+                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
+              />
+              {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
 
-        {/* Confirm Password */}
-        <TextInput
-          label="Confirm Password"
-          mode="outlined"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          placeholder="********"
-          secureTextEntry={!showConfirmPassword}
-          left={<TextInput.Icon icon="lock-outline" />}
-          right={
-            <TextInput.Icon
-              icon={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
-              onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-            />
-          }
-          style={styles.input}
-          theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
-        />
-        {errors.confirmPassword && (
-          <Text style={styles.errorText}>{errors.confirmPassword}</Text>
-        )}
+              {/* Confirm Password */}
+              <TextInput
+                label="Confirm Password"
+                mode="outlined"
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                placeholder="********"
+                secureTextEntry={!showConfirmPassword}
+                left={<TextInput.Icon icon="lock-outline" />}
+                right={
+                  <TextInput.Icon
+                    icon={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
+                    onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+                  />
+                }
+                style={styles.input}
+                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
+              />
+              {errors.confirmPassword && (
+                <Text style={styles.errorText}>{errors.confirmPassword}</Text>
+              )}
 
-        <TouchableOpacity>
-          <Text style={styles.resetText}>Forgot password? Reset here</Text>
-        </TouchableOpacity>
-      </View>
+              <TouchableOpacity>
+                <Text style={styles.resetText}>Forgot password? Reset here</Text>
+              </TouchableOpacity>
+            </View>
 
-      {/* Signup Button */}
-      <Button
-        mode="contained"
-        onPress={handleSignup}
-        style={styles.signupButton}
-        labelStyle={{ color: "#000", fontSize: 16 }}
-        buttonColor="#FFEFE7"
-      >
-        Sign Up
-      </Button>
+            {/* Signup Button */}
+            <Button
+              mode="contained"
+              onPress={handleSignup}
+              style={styles.signupButton}
+              labelStyle={{ color: "#000", fontSize: 16 }}
+              buttonColor="#FFEFE7"
+            >
+              Sign Up
+            </Button>
 
-      {/* Login Redirect */}
-      <Text style={styles.loginText}>
-        Already have an Account?{" "}
-        <Text
-          style={styles.loginLink}
-          onPress={() => router.push('/(auth)/login')}
-        >
-          Sign in here
-        </Text>
-      </Text>
+            {/* Login Redirect */}
+            <Text style={styles.loginText}>
+              Already have an Account?{" "}
+              <Text
+                style={styles.loginLink}
+                onPress={() => router.push('/(auth)/login')}
+              >
+                Sign in here
+              </Text>
+            </Text>
+        
+            
+            </View>
+          </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -161,6 +173,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 25,
+  },
+  inner: {
+    flex: 1,
+    justifyContent: "center",
   },
   logoContainer: {
     alignItems: "center",
