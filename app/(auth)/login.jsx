@@ -6,13 +6,14 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
   const router = useRouter();
 
   return (
@@ -60,22 +61,23 @@ export default function LoginScreen() {
       </View>
 
       {/* Login Button */}
-      <Button
-        mode="contained"
-        onPress={() => console.log("Login pressed")}
+     
+      <TouchableOpacity
         style={styles.loginButton}
-        labelStyle={{ color: "#000", fontSize: 16 }}
-        buttonColor="#FFEFE7"
+        onPress={() => {
+          // replace so user can't go back to the login screen after signing in
+          router.push('/(home)');
+        }}
       >
-        Login
-      </Button>
+        <Text style={styles.loginButtonText}>Log In</Text>
+      </TouchableOpacity>
 
       {/* Sign Up Link */}
       <Text style={styles.signupText}>
         Already have an Account?{" "}
         <Text
           style={styles.signupLink}
-          onPress={() => router.push('/auth/signUpScreen')}
+          onPress={() => router.push('/(auth)/signUp')}
         >
           Sign up here
         </Text>
@@ -121,8 +123,15 @@ const styles = StyleSheet.create({
   loginButton: {
     width: "100%",
     borderRadius: 10,
-    paddingVertical: 5,
+    paddingVertical: 15,
     marginBottom: 20,
+    backgroundColor: "#FFEFE7",
+  },
+  loginButtonText: {
+    color: "#000",
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: "center",
   },
   signupText: {
     color: "#fff",

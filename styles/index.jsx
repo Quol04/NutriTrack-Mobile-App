@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   mealTextContainer: {
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 40,
   },
   mealTitle: {
     color: "#fff",
@@ -154,7 +154,8 @@ const styles = StyleSheet.create({
   },
   skipText: {
     color: "rgba(255,255,255,0.8)",
-    fontSize: 14,
+    fontSize: 18,
+    fontWeight: "700",
   },
   nextButton: {
     backgroundColor: "#fff",

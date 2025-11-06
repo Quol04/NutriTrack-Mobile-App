@@ -32,9 +32,9 @@ export default function OnboardingScreen({ navigation }) {
     if (currentIndex < slides.length - 1) {
       flatListRef.current.scrollToIndex({ index: currentIndex + 1 });
     } else {
-      router.push('/auth/loginScreen');
+      router.push('/(auth)/login');
       // Navigate to your main app screen here
-      console.log("Onboarding finished");
+      
     }
   };
 
@@ -43,7 +43,8 @@ export default function OnboardingScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    // <SafeAreaView style={styles.container} >
+      <View style={styles.mealContainer}>
       <FlatList
         data={slides}
         horizontal
@@ -99,7 +100,8 @@ export default function OnboardingScreen({ navigation }) {
           </ImageBackground>
         )}
       />
-    </SafeAreaView>
+      </View>
+    // </SafeAreaView>
   );
 }
 
