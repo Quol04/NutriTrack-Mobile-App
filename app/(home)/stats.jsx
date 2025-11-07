@@ -4,12 +4,15 @@ import ProgressCard from "@/components/dashboard/ProgressCard";
 import StatusCard from "@/components/dashboard/StatusCard";
 import CalendarCard from "@/components/dashboard/CalendarCard";
 import SummaryCard from "@/components/dashboard/SummaryCard";
-import SectionTitle from "@/components/dashboard/SectionTitle";
+import { SafeAreaView } from "react-native-safe-area-context";
+import SectionHeader from "@/components/common/SectionHeader";
 
 const DashboardScreen = () => {
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <SectionTitle title="Dashboard" />
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView style={styles.safe} showsVerticalScrollIndicator={false}>
+       <SectionHeader subtitle="YOUR PROGRESS" title="Dashboard" />
+       <View style={styles.container}>
 
       <ProgressCard
         title="Your Weekly Progress"
@@ -38,16 +41,21 @@ const DashboardScreen = () => {
       />
 
       <SummaryCard title="View Logged Meals" icon="👁️" />
+      </View>
     </ScrollView>
+  </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safe: {
     flex: 1,
     backgroundColor: "#F5F5F5",
-    paddingHorizontal: 20,
-    paddingTop: 40,
+   
+  },
+  container: {
+    paddingHorizontal: 16,
+    paddingBottom: 20,
   },
   row: {
     flexDirection: "row",

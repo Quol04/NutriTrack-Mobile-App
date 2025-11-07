@@ -9,10 +9,11 @@ import {
 } from "react-native";
 import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { styles } from "@/styles/_home";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const NutriTrackHome = () => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
@@ -103,7 +104,8 @@ const NutriTrackHome = () => {
         </View>
       </ScrollView>
     
-    </View>
+    {/* </View> */}
+    </SafeAreaView>
   );
 };
 
