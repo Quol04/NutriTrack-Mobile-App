@@ -22,9 +22,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     padding: 16,
     position: "relative",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
   },
-  title: { fontSize: 18, fontWeight: "700", color: "#000" },
-  subtitle: { color: "#777", marginTop: 4 },
+  title: { 
+    fontSize: 18, 
+    fontWeight: "700", 
+    color: "#000"
+   },
+  subtitle: { 
+    color: "#777", 
+    marginTop: 4 
+  },
   orangeButton: {
     backgroundColor: colors.accentOrange,
     borderRadius: 8,

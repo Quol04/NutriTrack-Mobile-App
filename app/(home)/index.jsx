@@ -6,6 +6,7 @@ import SmartSuggestionCard from "@/components/home/SmartSuggestionCard";
 import CommunityCard from "@/components/home/CommunityCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SectionHeader from "@/components/common/SectionHeader";
+import colors from "@/styles/colors";
 
 
 const NutriTrackHome = () => (
@@ -13,11 +14,7 @@ const NutriTrackHome = () => (
   <View style={styles.container}>
     <ScrollView showsVerticalScrollIndicator={false}>
       <Header name="Samuel" date="27th June 2025" />
-      {/* <View style={styles.sectionHeader}>
-        <Text style={styles.subHeading}>DIETARY ASSISTANT</Text>
-        <Text style={styles.title}>Smart{"\n"}Suggestions</Text>
-      </View> */}
-      <SectionHeader style={styles.sectionHeader} subtitle="DIETARY ASSISTANT" title={"Smart\nSuggestions"} />
+      <SectionHeader  subtitle="DIETARY ASSISTANT" title={"Smart\nSuggestions"} />
       <DailyCheckIn />
       <SmartSuggestionCard />
       <CommunityCard />
@@ -31,7 +28,7 @@ export default NutriTrackHome;
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: "#F9F9F9" 
+    backgroundColor: colors.secondary
   },
   sectionHeader: { 
     paddingHorizontal: 20, 
@@ -42,10 +39,7 @@ const styles = StyleSheet.create({
     fontSize: 12, 
     letterSpacing: 1 
   },
-  sectionHeader: { 
-    // paddingHorizontal: 20, 
-    marginTop: 1
-  },
+
   title: { 
     fontSize: 26, 
     fontWeight: "800", 

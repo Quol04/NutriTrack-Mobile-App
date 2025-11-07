@@ -12,7 +12,7 @@ const SmartSuggestionCard = () => (
       </TouchableOpacity>
     </View>
     <Image
-      source={{ uri: "https://i.ibb.co/1zjxP2k/rice.png" }}
+      source={require("@/assets/images/food01.png")}
       style={styles.foodImage}
     />
   </View>
@@ -30,9 +30,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
     elevation: 2,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
   },
-  cardTitle: { fontSize: 12, color: "#777", fontWeight: "500" },
-  cardQuestion: { fontSize: 16, fontWeight: "600", color: "#000", marginVertical: 4 },
+  cardTitle: { 
+    fontSize: 12, 
+    color: "#777", 
+    fontWeight: "500" 
+  },
+  cardQuestion: { 
+    fontSize: 16, 
+    fontWeight: "600", 
+    color: "#000", 
+    marginVertical: 4 
+  },
   greenButton: {
     backgroundColor: colors.accentGreen,
     paddingVertical: 6,
@@ -40,6 +51,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 8,
   },
-  greenButtonText: { fontWeight: "600", color: "#000" },
-  foodImage: { width: 80, height: 80, borderRadius: 50, marginLeft: 12 },
+  greenButtonText: { 
+    fontWeight: "600", 
+    color: "#000" 
+  },
+  foodImage: {
+     width: 80, 
+     height: 80, 
+     borderRadius: 50, 
+     marginLeft: 12 
+    },
 });

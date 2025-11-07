@@ -57,7 +57,11 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 16,
   },
-  title: { color: "white", fontSize: 16, marginBottom: 10 },
+  title: { 
+    color: "white", 
+    fontSize: 16, 
+    marginBottom: 10 
+  },
   dayList: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -69,9 +73,16 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 10,
   },
-  activeDayBox: { backgroundColor: "#6DF57D" },
-  dayText: { color: "#ccc", fontSize: 12 },
-  activeDayText: { color: "#000", fontWeight: "600" },
+  activeDayBox: { 
+    backgroundColor: "#6DF57D" 
+  },
+  dayText: { 
+    color: "#ccc", 
+    fontSize: 12 },
+  activeDayText: {
+     color: "#000", 
+     fontWeight: "600" 
+    },
   mealProgress: {
     backgroundColor: "#fff",
     borderRadius: 16,
@@ -104,5 +115,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: "center",
   },
-  logMealText: { color: "#fff", fontWeight: "600", fontSize: 15 },
+  logMealText: { 
+    color: "#fff", 
+    fontWeight: "600", 
+    fontSize: 15 },
 });
