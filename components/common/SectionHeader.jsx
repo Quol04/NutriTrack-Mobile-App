@@ -13,7 +13,6 @@ export default function SectionHeader({ subtitle, title }) {
 const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 16,
-    paddingTop: 28,
     paddingBottom: 8,
   },
   sub: {

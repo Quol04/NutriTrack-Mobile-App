@@ -43,7 +43,10 @@ export default function CommunityScreen() {
 const styles = StyleSheet.create({
   safe: { 
     flex: 1, 
-    backgroundColor: "#F7F7F7" },
+    backgroundColor: "#F7F7F7",
+    paddingTop: 20,
+ },
+    
   container: { 
     flex: 1, 
     backgroundColor: "#F7F7F7" },

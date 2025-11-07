@@ -2,17 +2,20 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import colors from "@/styles/colors";
+import NotificationIcon from "@/components/common/NotificationIcon";
 
 const Header = ({ name, date }) => (
   <View style={styles.header}>
     <View>
-      <Text style={styles.greeting}>Hello, {name}</Text>
+      <Text style={styles.greeting}>Hello, {name} !</Text>
       <Text style={styles.date}>{date}</Text>
     </View>
-    <View style={styles.notificationIcon}>
-      <Feather name="bell" size={22} color="#000" />
-      <View style={styles.notificationDot} />
-    </View>
+    <NotificationIcon
+      notifications={[
+        { title: "Meal Reminder", desc: "Time for your breakfast!" },
+        { title: "Weekly Report", desc: "Your progress summary is ready." },
+      ]}
+       />
   </View>
 );
 
@@ -29,6 +32,7 @@ const styles = StyleSheet.create({
   greeting: {
     fontSize: 16,
     color: "#333",
+    marginBottom: 4,
   },
   date: {
     fontSize: 18,

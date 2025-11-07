@@ -9,7 +9,7 @@ import SectionHeader from "@/components/common/SectionHeader";
 
 const DashboardScreen = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1,paddingTop: 20 }}>
       <ScrollView style={styles.safe} showsVerticalScrollIndicator={false}>
        <SectionHeader subtitle="YOUR PROGRESS" title="Dashboard" />
        <View style={styles.container}>

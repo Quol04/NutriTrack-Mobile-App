@@ -10,7 +10,7 @@ import { Feather } from "@expo/vector-icons";
 
 const LogScreen = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1,paddingTop: 20,}}>
       <SectionHeader
         subtitle="LOG YOUR MEAL"
         title="Meal Logging"
