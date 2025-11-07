@@ -15,8 +15,8 @@ const DashboardScreen = () => {
        <View style={styles.container}>
 
       <ProgressCard
-        title="Your Weekly Progress"
-        subtitle="Completion"
+        title="Completion"
+        subtitle="Your Weekly Progress"
         progress={0.6}
         daysLeft={4}
       />

@@ -5,6 +5,7 @@ import CameraFrame from "@/components/logs/CameraFrame";
 import UploadButton from "@/components/logs/UploadButton";
 import IconButton from "@/components/logs/IconButton";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Feather } from "@expo/vector-icons";
 // import BottomNavBar from "@/components/logs/BottomNavBar";
 
 const LogScreen = () => {
@@ -24,7 +25,7 @@ const LogScreen = () => {
 
       <View style={styles.actions}>
         <UploadButton title="Upload from Gallery" />
-        <IconButton icon="📷" />
+        <IconButton icon={<Feather name="camera" size={24} color="#fff" />} />
       </View>
     </View>
     </SafeAreaView>
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingHorizontal: 18,
   },
 });
 

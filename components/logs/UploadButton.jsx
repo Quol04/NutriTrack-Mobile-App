@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#EAEAEA",
     borderRadius: 10,
     paddingVertical: 14,
-    paddingHorizontal: 24,
+    paddingHorizontal: 14,
     flex: 1,
     marginRight: 10,
     alignItems: "center",
