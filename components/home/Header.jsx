@@ -14,6 +14,10 @@ const Header = ({ name, date }) => (
       notifications={[
         { title: "Meal Reminder", desc: "Time for your breakfast!" },
         { title: "Weekly Report", desc: "Your progress summary is ready." },
+        { title: "Community Report", desc: "Your progress summary is ready." },
+        { title: "Weekly Report", desc: "Your progress summary is ready." },
+        { title: "Weekly Report", desc: "Your progress summary is ready." },
+        { title: "Weekly Report", desc: "Your progress summary is ready." }
       ]}
        />
   </View>

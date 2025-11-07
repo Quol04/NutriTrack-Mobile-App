@@ -12,7 +12,7 @@ const NotificationIcon = ({ notifications }) => {
         style={styles.iconContainer}
         onPress={() => setVisible(true)}
       >
-        <Feather name="bell" size={22} color="#000" />
+        <Feather name="bell" size={24} color="#000" />
         {notifications.length > 0 && <View style={styles.dot} />}
       </TouchableOpacity>
 
@@ -27,7 +27,7 @@ const NotificationIcon = ({ notifications }) => {
 
 const styles = StyleSheet.create({
   iconContainer: {
-    backgroundColor: "#F2F2F2",
+    backgroundColor: "#dddadaff",
     borderRadius: 16,
     padding: 10,
     position: "relative",
