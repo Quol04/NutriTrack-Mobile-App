@@ -1,4 +1,4 @@
-import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome,Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 // import { navStyles } from "@/styles/_navStyles";
 
@@ -29,7 +29,7 @@ const HomeRootLayout = () => {
             }} />
             <Tabs.Screen name="stats" options={{
                 title:"Stats",
-                tabBarIcon: ({color}) => <Feather name="edit-3" size={24} color={color}/>
+                tabBarIcon: ({color}) => <FontAwesome name="dashboard" size={24} color={color} />
             }} />
 
         </Tabs>

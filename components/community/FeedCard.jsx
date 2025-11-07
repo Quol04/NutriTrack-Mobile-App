@@ -29,8 +29,16 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     backgroundColor: "#ddd",
   },
-  image: { width: "100%", height: "100%" },
-  playOverlay: { position: "absolute", top: "38%", left: "38%" },
+  image: { 
+    width: "100%",
+    height: "100%" 
+    },
+  playOverlay: {
+     position: "absolute", 
+     top: "38%", 
+     left: "38%" ,
+    //  backgroundColor: "rgba(0,0,0,0.3)",
+    },
   overlay: {
     position: "absolute",
     bottom: 0,

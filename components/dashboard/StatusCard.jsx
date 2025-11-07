@@ -1,12 +1,19 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet,Image } from "react-native";
 
 const StatusCard = ({ label, value, icon, type, message, subtitle }) => {
   if (type === "highlight") {
     return (
       <View style={[styles.card, styles.highlight]}>
-        <Text style={styles.message}>{message}</Text>
-        <Text style={styles.subtitle}>{subtitle}</Text>
+        <View>
+          <Text style={styles.message}>{message}</Text>
+          <Text style={styles.subtitle}>{subtitle}</Text>
+        </View>
+        <Image 
+          source={require('@/assets/images/vector.png')}
+          style={styles.image}
+        />
+        <Text style={styles.icon}>{icon}</Text>
       </View>
     );
   }
@@ -29,10 +36,18 @@ const styles = StyleSheet.create({
     padding: 16,
     width: "48%",
     marginBottom: 12,
+    // flexDirection: "row",
+    // justifyContent: "space-between",
+    // alignItems: "center",
   },
   label: {
     fontSize: 12,
     color: "#666",
+    marginBottom: 8,
+  },
+  image: {
+    width: 34,
+    height: 44,
   },
   value: {
     fontSize: 18,
