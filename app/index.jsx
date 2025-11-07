@@ -1,72 +1,31 @@
-import { images } from "@/constants";
-import { styles } from "@/styles";
-import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import {
-  Dimensions,
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { View, Text, Dimensions, StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
+import { images } from "@/constants";
+import Carousel from "@/components/onboarding/Carousel";
+import DotIndicator from "@/components/onboarding/DotIndicator";
+import AuthButtons from "@/components/common/onboardingButton";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 
 export default function Index() {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
-  
   const { width } = Dimensions.get("window");
- 
- 
+
   const handleScroll = (event) => {
     const index = Math.round(event.nativeEvent.contentOffset.x / width);
     setCurrentIndex(index);
   };
 
-  const handleGetStarted = () => {
-    router.push('/mealLogging');
-  }
-
-  const handleLogin = () => {
-    router.push('/(auth)/login');
-  }
-
-
   return (
     <SafeAreaView style={styles.container}>
       {/* Image Carousel */}
-      <View style={styles.carouselContainer}>
-        <FlatList
-          data={images}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          pagingEnabled
-          onScroll={handleScroll}
-          scrollEventThrottle={16}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.imageWrapper}>
-              <Image source={item} style={styles.image} resizeMode="cover" />
-            </View>
-          )}
-        />
-      </View>
+      <Carousel images={images} onScroll={handleScroll} />
 
       {/* Dots Indicator */}
-      <View style={styles.dotContainer}>
-        {images.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.dot,
-              currentIndex === index && styles.activeDot,
-            ]}
-          />
-        ))}
-      </View>
+      <DotIndicator total={images.length} activeIndex={currentIndex} />
 
+      {/* Text Content */}
       <View style={styles.textContainer}>
         <Text style={styles.subheading}>FOR FITNESS ENTHUSIASTS</Text>
         <Text style={styles.title}>NutriTrack</Text>
@@ -75,16 +34,45 @@ export default function Index() {
         </Text>
       </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.primaryButton} onPress={handleGetStarted}>
-          <Text style={styles.primaryButtonText}>Get Started</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.secondaryButton} onPress={handleLogin}>
-          <Text style={styles.secondaryButtonText}>Login</Text>
-        </TouchableOpacity>
-      </View>
+      {/* Action Buttons */}
+      <AuthButtons
+        onGetStarted={() => router.push("/onboarding")}
+        onLogin={() => router.push("/(auth)/login")}
+      />
     </SafeAreaView>
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#0A0A0A",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 30,
+  },
+  textContainer: {
+    alignItems: "center",
+    // marginTop: 2,
+  },
+  subheading: {
+    color: "#888",
+    fontSize: 12,
+    letterSpacing: 1,
+    marginBottom: 8,
+    fontWeight: "500",
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "800",
+    color: "#FFF",
+    marginBottom: 8,
+  },
+  subtitle: {
+    color: "#ccc",
+    fontSize: 14,
+    lineHeight: 20,
+    textAlign: "center",
+    fontWeight: "500",
+  },
+});

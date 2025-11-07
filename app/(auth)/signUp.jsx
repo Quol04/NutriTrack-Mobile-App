@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   input: {
-    backgroundColor: "transparent",
+    backgroundColor: "#222",
     marginBottom: 10,
   },
   resetText: {

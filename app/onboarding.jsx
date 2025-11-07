@@ -10,7 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { slides } from "@/constants/";
-import {styles} from "@/styles/";
+import {styles} from "@/styles/onboardingStyles";
 import { useRouter } from "expo-router";
 
 
@@ -44,7 +44,7 @@ export default function OnboardingScreen({ navigation }) {
 
   return (
     // <SafeAreaView style={styles.container} >
-      <View style={styles.mealContainer}>
+    <View style={styles.container}>
       <FlatList
         data={slides}
         horizontal

@@ -41,7 +41,7 @@ export default function LoginScreen() {
                 value={email}
                 onChangeText={setEmail}
                 placeholder="Johndoe@gmail.com"
-                left={<TextInput.Icon icon="email-outline" />}
+                left={<TextInput.Icon icon="email-outline"  />}
                 style={styles.input}
                 theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
               />
@@ -61,7 +61,7 @@ export default function LoginScreen() {
                   />
                 }
                 style={styles.input}
-                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
+                theme={{ colors: { text: "#fff", placeholder: "#fff" } }}
               />
 
               <TouchableOpacity>
@@ -128,8 +128,9 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   input: {
-    backgroundColor: "transparent",
+    backgroundColor: "#222",
     marginBottom: 15,
+    color: "#fff",
   },
   resetText: {
     color: "#ccc",
