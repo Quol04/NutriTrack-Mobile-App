@@ -10,7 +10,7 @@ const CommunityCard = ({onPress}) => (
        style={styles.image} 
        resizeMode="contain"
        />
-    <View> 
+    <View style={styles.communitydescription}> 
       <Text style={styles.title}>Nutrition on your mind?</Text>
       <Text style={styles.subtitle}>Visit the community</Text>
     </View> 
@@ -27,13 +27,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 16,
     marginHorizontal: 18,
-    paddingVertical: 8,
-    position: "relative",
+    paddingVertical: 10,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     flexDirection: "row",
     alignItems: "center",
     shadowRadius: 8,
+  
     // marginBottom: 20,
   },
   image: { 
@@ -42,9 +42,15 @@ const styles = StyleSheet.create({
     marginRight: 16, 
     marginLeft: 12
   },
+  communitydescription: { 
+    // flex: 1, 
+    // flexDirection: "column", 
+    marginRight: 40
+    
+  },
   title: { 
-    fontSize: 18, 
-    fontWeight: "700", 
+    fontSize: 22, 
+    // fontWeight: "600", 
     color: "#000"
    },
   subtitle: { 

@@ -17,3 +17,4 @@ export const SAMPLE_FOODS = [
   { id: "7", name: "Corn Flakes", image: "https://i.ibb.co/FqMk4vX/cornflakes.jpg" },
   { id: "8", name: "Golden Morn", image: "https://i.ibb.co/2g0m7J2/golden-morn.jpg" },
 ];
+
