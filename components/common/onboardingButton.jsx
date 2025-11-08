@@ -2,7 +2,7 @@ import { width } from "@/styles/_smartStyles";
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet,Dimensions } from "react-native";
 
-export default function AuthButtons({ onGetStarted, onLogin }) {
+export default function OnboardingButtons({ onGetStarted, onLogin }) {
     const { width } = Dimensions.get("window");
   return (
     <View style={styles.buttonContainer}>

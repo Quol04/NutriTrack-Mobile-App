@@ -1,13 +1,20 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Image,Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import colors from "@/styles/colors";
 
-const CommunityCard = () => (
+const CommunityCard = ({onPress}) => (
   <View style={styles.container}>
-    <Text style={styles.title}>Nutrition on your mind?</Text>
-    <Text style={styles.subtitle}>Visit the community</Text>
-    <TouchableOpacity style={styles.orangeButton}>
+    <Image 
+       source={require("@/assets/images/home-community.png")} 
+       style={styles.image} 
+       resizeMode="contain"
+       />
+    <View> 
+      <Text style={styles.title}>Nutrition on your mind?</Text>
+      <Text style={styles.subtitle}>Visit the community</Text>
+    </View> 
+    <TouchableOpacity style={styles.orangeButton} onPress={onPress}>
       <Feather name="arrow-up-right" size={18} color="white" />
     </TouchableOpacity>
   </View>
@@ -19,11 +26,21 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     borderRadius: 16,
-    marginHorizontal: 20,
-    padding: 16,
+    marginHorizontal: 18,
+    paddingVertical: 8,
     position: "relative",
     shadowColor: "#000",
     shadowOpacity: 0.1,
+    flexDirection: "row",
+    alignItems: "center",
+    shadowRadius: 8,
+    // marginBottom: 20,
+  },
+  image: { 
+    width: 60, 
+    height: 60,
+    marginRight: 16, 
+    marginLeft: 12
   },
   title: { 
     fontSize: 18, 

@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { images } from "@/constants";
 import Carousel from "@/components/onboarding/Carousel";
 import DotIndicator from "@/components/onboarding/DotIndicator";
-import AuthButtons from "@/components/common/onboardingButton";
+import OnboardingButtons from "@/components/common/OnboardingButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -35,7 +35,7 @@ export default function Index() {
       </View>
 
       {/* Action Buttons */}
-      <AuthButtons
+      <OnboardingButtons
         onGetStarted={() => router.push("/onboarding")}
         onLogin={() => router.push("/(auth)/login")}
       />

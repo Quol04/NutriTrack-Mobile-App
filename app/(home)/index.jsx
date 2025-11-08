@@ -9,6 +9,7 @@ import colors from "@/styles/colors";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { meals } from "@/constants/mealsTimetable";
+import { router } from "expo-router";
 
 
 const NutriTrackHome = () => (
@@ -21,7 +22,7 @@ const NutriTrackHome = () => (
       <MealTimeline meals={meals} />
       <LogMealButton />
       <SmartSuggestionCard />
-      <CommunityCard />
+      <CommunityCard onPress={() => router.push("/(home)/community")} />
     </ScrollView>
   </View>
   </SafeAreaView>
