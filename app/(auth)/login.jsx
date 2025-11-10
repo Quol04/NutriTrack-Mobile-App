@@ -1,24 +1,44 @@
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
+  ActivityIndicator,
+  Alert,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-  KeyboardAvoidingView,
-  Keyboard,
-  Platform,
   TouchableWithoutFeedback,
+  View,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { loginUser } from "./auth";
+
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+    const handleLogin = async () => {
+    try {
+      setLoading(true);
+      const token = await loginUser(email, password);
+      Alert.alert("Success", "Login successful!");
+      router.replace('/(home)');
+    } catch (err) {
+      // err may be a string message from the API helper
+      const message = typeof err === "string" ? err : err?.message || "Login failed";
+      Alert.alert("Login Failed", message);
+      console.error("Login error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,7 +63,19 @@ export default function LoginScreen() {
                 placeholder="Johndoe@gmail.com"
                 left={<TextInput.Icon icon="email-outline"  />}
                 style={styles.input}
-                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
+                editable={!loading}
+                theme={{
+                      colors: {
+                        text: "#fff",             // typed text
+                        placeholder: "#aaa",      // placeholder text
+                        primary: "#fff",          // focused outline color
+                        outline: "#888",          // unfocused outline
+                        background: "#fff" // transparent background
+                      },
+                    }}
+                    placeholderTextColor="#fff"
+                
+                // {{ colors: { text: "#fff", placeholder: "#aaa" } }}
               />
 
               <TextInput
@@ -61,7 +93,20 @@ export default function LoginScreen() {
                   />
                 }
                 style={styles.input}
-                theme={{ colors: { text: "#fff", placeholder: "#fff" } }}
+                editable={!loading}
+                theme={{
+                      colors: {
+                        text: "#fff",             // typed text
+                        placeholder: "#aaa",      // placeholder text
+                        primary: "#fff",          // focused outline color
+                        outline: "#888",          // unfocused outline
+                        background: "transparent" // transparent background
+                      },
+                    }}
+                    placeholderTextColor="#aaa"
+
+
+                // {{ colors: { text: "#fff", placeholder: "#fff" } }}
               />
 
               <TouchableOpacity>
@@ -72,13 +117,15 @@ export default function LoginScreen() {
             {/* Login Button */}
           
             <TouchableOpacity
-              style={styles.loginButton}
-              onPress={() => {
-                // replace so user can't go back to the login screen after signing in
-                router.push('/(home)');
-              }}
+              style={[styles.loginButton, loading ? styles.loginButtonDisabled : null]}
+              onPress={handleLogin}
+              disabled={loading}
             >
-              <Text style={styles.loginButtonText}>Log In</Text>
+              {loading ? (
+                <ActivityIndicator size="small" color="#000" />
+              ) : (
+                <Text style={styles.loginButtonText}>Log In</Text>
+              )}
             </TouchableOpacity>
 
             {/* Sign Up Link */}
@@ -157,5 +204,8 @@ const styles = StyleSheet.create({
   signupLink: {
     color: "#FFEFE7",
     textDecorationLine: "underline",
+  },
+  loginButtonDisabled: {
+    opacity: 0.6,
   },
 });

@@ -1,37 +1,42 @@
-import { router } from "expo-router";
-import React, { useState } from "react";
+import { useRouter } from "expo-router";
+import { useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
   Alert,
-  KeyboardAvoidingView,
   Keyboard,
+  KeyboardAvoidingView,
   Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
+  View,
 } from "react-native";
-import { TextInput, Button } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { registerUser } from "./auth";
+// import axios from "axios";
 
-export default function SignupScreen({ navigation }) {
-  const [username, setUsername] = useState("");
+
+export default function SignupScreen() {
+  const router = useRouter();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const validateEmail = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(value);
   };
 
-  const handleSignup = () => {
+  const handleSignup = async() => {
     let newErrors = {};
 
-    if (!username.trim()) newErrors.username = "Username is required.";
+    if (!name.trim()) newErrors.name = "Username is required.";
     if (!email.trim()) newErrors.email = "Email or phone is required.";
     else if (!validateEmail(email)) newErrors.email = "Invalid email format.";
     if (!password) newErrors.password = "Password is required.";
@@ -41,14 +46,32 @@ export default function SignupScreen({ navigation }) {
     else if (password !== confirmPassword)
       newErrors.confirmPassword = "Passwords do not match.";
 
-    setErrors(newErrors);
+    // setErrors(newErrors);
 
-    if (Object.keys(newErrors).length === 0) {
-      // All checks passed
-      Alert.alert("Signup Successful!", "Welcome to NutriTrack 🎉");
-      // navigation.navigate("Login"); // Uncomment when connected to backend or real navigation flow
+      setLoading(true);
+    try {
+      const message = await registerUser(name, email, password);
+      Alert.alert("Success", message || "Registration successful!");
+      console.log("Registration successful:", message);
+      // navigate to login using expo-router
+      router.replace('./login');
+    } catch (err) {
+      Alert.alert("Error", err?.message || "Registration failed!")
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
+
+   
+
+    // if (Object.keys(newErrors).length === 0) {
+    //   // All checks passed
+    //   Alert.alert("Signup Successful!", "Welcome to NutriTrack 🎉");
+    //   // navigation.navigate("Login"); // Uncomment when connected to backend or real navigation flow
+    // }
+
+  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -67,12 +90,12 @@ export default function SignupScreen({ navigation }) {
               <TextInput
                 label="Username"
                 mode="outlined"
-                value={username}
-                onChangeText={setUsername}
+                value={name}
+                onChangeText={setName}
                 placeholder="Johndoe"
                 left={<TextInput.Icon icon="account-outline" />}
                 style={styles.input}
-                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
+                theme={{ colors: { text: "#fff", placeholder: "#fff" } }}
               />
               {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
 
@@ -198,6 +221,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: "#222",
     marginBottom: 10,
+    color: "#fff",
   },
   resetText: {
     color: "#ccc",
