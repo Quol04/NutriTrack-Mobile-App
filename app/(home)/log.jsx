@@ -1,22 +1,22 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
 import SectionHeader from "@/components/common/SectionHeader";
 import CameraFrame from "@/components/logs/CameraFrame";
-import UploadButton from "@/components/logs/UploadButton";
 import IconButton from "@/components/logs/IconButton";
-import { SafeAreaView } from "react-native-safe-area-context";
+import MealLogList from "@/components/logs/MealLogList"; // ✅ Import reusable component
+import UploadButton from "@/components/logs/UploadButton";
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import MealLogCamera from "@/components/logs/MealLogCamera";
-// import BottomNavBar from "@/components/logs/BottomNavBar";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 
 const LogScreen = () => {
+  const [mealLogs, setMealLogs] = React.useState([]); // ✅ store meal logs locally
+
   const router = useRouter();
   const openCamera = () => {
-    <MealLogCamera />;
-    // Logic to open the camera
     router.push('/MealLogCamera');
-    console.log("Camera opened");
+    // console.log("Camera opened");
   }
   return (
     <SafeAreaView style={{ flex: 1,paddingTop: 20,}}>
@@ -26,7 +26,7 @@ const LogScreen = () => {
       />
     <View style={styles.container}>
       {/* <View><Text>Take photo of meal you want logged</Text></View> */}
-      {/* <Text>Take photo of meal you want logged</Text> */}
+      <Text style={styles.instructionText}>Take photo of meal you want logged</Text>
 
       <View style={styles.cameraSection}>
         <CameraFrame />
@@ -36,6 +36,9 @@ const LogScreen = () => {
         <UploadButton title="Upload from Gallery" />
         <IconButton icon={<Feather name="camera" size={24} color="#fff" />} onPress={openCamera} />
       </View>
+       {/* ✅ Display Logged Meals */}
+      <Text style={styles.subHeading}>Your Logged Meals</Text>
+      <MealLogList logs={mealLogs} />
     </View>
     </SafeAreaView>
   );
@@ -46,6 +49,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F5F5F5",
 
+  },
+  instructionText: {
+    fontSize: 14,
+    marginLeft: 16,
   },
   cameraSection: {
     alignItems: "center",
@@ -59,6 +66,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 18,
+  },
+   subHeading: {
+    fontSize: 18,
+    fontWeight: "600",
+    marginTop: 20,
+    // marginBottom: 10,
+    marginLeft: 16,
+
   },
 });
 

@@ -24,19 +24,20 @@ export default function LoginScreen() {
 
   const router = useRouter();
     const handleLogin = async () => {
-    try {
-      setLoading(true);
-      const token = await loginUser(email, password);
-      // Alert.alert("Success", "Login successful!");
       router.replace('/(home)');
-    } catch (err) {
-      // err may be a string message from the API helper
-      const message = typeof err === "string" ? err : err?.message || "Login failed";
-      Alert.alert("Login Failed", message);
-      console.error("Login error:", err);
-    } finally {
-      setLoading(false);
-    }
+    // try {
+    //   setLoading(true);
+    //   const token = await loginUser(email, password);
+    //   // Alert.alert("Success", "Login successful!");
+    //   router.replace('/(home)');
+    // } catch (err) {
+    //   // err may be a string message from the API helper
+    //   const message = typeof err === "string" ? err : err?.message || "Login failed";
+    //   Alert.alert("Login Failed", message);
+    //   console.error("Login error:", err);
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (

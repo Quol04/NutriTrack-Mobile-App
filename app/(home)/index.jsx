@@ -40,6 +40,11 @@ const NutriTrackHome = () => {
   const [userName, setUserName] = useState("");
   const [dateStr, setDateStr] = useState(formatDateWithOrdinal(new Date()));
 
+   const openCamera = () => {
+    router.push('/MealLogCamera');
+    // console.log("Camera opened");
+  }
+
   useEffect(() => {
     let mounted = true;
     const safeDecode = (token) => {
@@ -106,7 +111,7 @@ const NutriTrackHome = () => {
           <SectionHeader subtitle="DIETARY ASSISTANT" title={"Smart\nSuggestions"} />
           <DailyCheckIn />
           <View style={{ padding: 16 }}>
-            <MealTimelineCard meals={meals} onLogMeal={() => console.log("Log meal pressed")} />
+            <MealTimelineCard meals={meals} onLogMeal={openCamera} />
           </View>
           <SmartSuggestionCard onPress={() => router.push("/(home)/smart")} />
           <CommunityCard onPress={() => router.push("/(home)/community")} />

@@ -6,7 +6,6 @@ import FilterChipsRow from "@/components/smart/FilterChipRow";
 import FoodCard from "@/components/smart/FoodCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-// import BottomNav from "../components/common/BottomNav";
 
 export default function MealsScreen() {
   const [activeFilter, setActiveFilter] = useState(FILTERS[0]);
