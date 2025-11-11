@@ -93,10 +93,9 @@
 
 
 // ============================?
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { ProgressCircle } from "react-native-svg-charts";
+import { StyleSheet, Text, View } from "react-native";
+import { Circle, Svg } from "react-native-svg";
 
 export default function ProgressCard({ completedDays = 4, totalDays = 7 }) {
   const progress = completedDays / totalDays;
@@ -115,13 +114,7 @@ export default function ProgressCard({ completedDays = 4, totalDays = 7 }) {
         </View>
 
         <View style={styles.progressWrapper}>
-          <ProgressCircle
-            style={{ height: 70, width: 70 }}
-            progress={progress}
-            progressColor="#7fff00"
-            backgroundColor="#fff"
-            strokeWidth={8}
-          />
+          <ProgressRing size={70} strokeWidth={8} progress={progress} color="#7fff00" bgColor="#fff" />
           <View style={styles.progressLabel}>
             <Text style={styles.progressNumber}>{completedDays}</Text>
             <Text style={styles.progressDays}>/{totalDays} days</Text>
@@ -129,6 +122,37 @@ export default function ProgressCard({ completedDays = 4, totalDays = 7 }) {
         </View>
       </View>
     </View>
+  );
+}
+
+function ProgressRing({ size = 70, strokeWidth = 8, progress = 0, color = "#7fff00", bgColor = "#fff" }) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference * (1 - Math.max(0, Math.min(1, progress)));
+
+  return (
+    <Svg width={size} height={size}>
+      <Circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        stroke={bgColor}
+        strokeWidth={strokeWidth}
+        fill="none"
+      />
+      <Circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        fill="none"
+        strokeDasharray={`${circumference} ${circumference}`}
+        strokeDashoffset={strokeDashoffset}
+        transform={`rotate(-90 ${size / 2} ${size / 2})`}
+      />
+    </Svg>
   );
 }
 
