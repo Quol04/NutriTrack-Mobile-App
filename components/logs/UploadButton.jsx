@@ -4,6 +4,7 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 const UploadButton = ({ title, onPress }) => (
   <TouchableOpacity style={styles.button} onPress={onPress}>
     <Text style={styles.text}>{title}</Text>
+    
   </TouchableOpacity>
 );
 

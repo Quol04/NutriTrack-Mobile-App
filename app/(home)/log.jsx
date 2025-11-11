@@ -6,9 +6,18 @@ import UploadButton from "@/components/logs/UploadButton";
 import IconButton from "@/components/logs/IconButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import MealLogCamera from "@/components/logs/MealLogCamera";
 // import BottomNavBar from "@/components/logs/BottomNavBar";
 
 const LogScreen = () => {
+  const router = useRouter();
+  const openCamera = () => {
+    <MealLogCamera />;
+    // Logic to open the camera
+    router.push('/MealLogCamera');
+    console.log("Camera opened");
+  }
   return (
     <SafeAreaView style={{ flex: 1,paddingTop: 20,}}>
       <SectionHeader
@@ -25,7 +34,7 @@ const LogScreen = () => {
 
       <View style={styles.actions}>
         <UploadButton title="Upload from Gallery" />
-        <IconButton icon={<Feather name="camera" size={24} color="#fff" />} />
+        <IconButton icon={<Feather name="camera" size={24} color="#fff" />} onPress={openCamera} />
       </View>
     </View>
     </SafeAreaView>
