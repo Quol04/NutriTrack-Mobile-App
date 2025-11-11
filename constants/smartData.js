@@ -3,8 +3,6 @@ const FILTERS = [
   "Weight Loss",
   "Cereal",
   "Diet",
-  "Vegan",
-  "High Protein",
 ];
 
 const SAMPLE_FOODS = [
