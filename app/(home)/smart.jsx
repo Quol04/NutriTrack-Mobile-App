@@ -71,11 +71,11 @@
 
 // ---------------------------------------------
 
+import api from "@/api";
 import SectionHeader from "@/components/common/SectionHeader";
 import FilterChipsRow from "@/components/smart/FilterChipRow";
 import FoodCard from "@/components/smart/FoodCard";
-import { BASE_URL } from "@/config";
-import { FILTERS } from "@/constants/mealsData";
+import { FILTERS, SAMPLE_FOODS } from "@/constants/mealsData";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, FlatList, StyleSheet, Text, View } from "react-native";
@@ -100,28 +100,22 @@ export default function MealsScreen() {
         setError(null);
         const token = await AsyncStorage.getItem("token"); // Store token after login
         if (!token) {
-          setError("User not authenticated");
+          // No auth token: fall back to local sample data so UI can be tested in dev
+          setFoods(SAMPLE_FOODS);
+          setError("Using sample data (not authenticated)");
           setLoading(false);
           return;
         }
 
-        const res = await fetch(`${BASE_URL}/api/suggestions`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!res.ok) {
-          const msg = await res.text();
-          throw new Error(msg || "Failed to fetch suggestions");
-        }
-
-        const data = await res.json();
-        // ensure an array
+        // use axios `api` instance which already attaches Authorization
+        const resp = await api.get("/api/suggestions");
+        const data = resp?.data;
         setFoods(Array.isArray(data) ? data : []);
       } catch (err) {
-        setError(err?.message || String(err));
+        const serverMsg = err?.response?.data?.message || err?.response?.data;
+        setError(serverMsg || err?.message || String(err));
+        // show sample data as a fallback so the UI isn't empty while backend is flaky
+        setFoods(SAMPLE_FOODS);
       } finally {
         setLoading(false);
       }

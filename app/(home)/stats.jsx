@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import SectionHeader from "@/components/common/SectionHeader";
 import { Feather } from "@expo/vector-icons";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MotivationCard from "@/components/dashboard/MotivationCard";
 
 const DashboardScreen = () => {
   return (
@@ -16,21 +17,11 @@ const DashboardScreen = () => {
        <SectionHeader subtitle="YOUR PROGRESS" title="Dashboard" />
        <View style={styles.container}>
 
-      <ProgressCard
-        title="Completion"
-        subtitle="Your Weekly Progress"
-        progress={0.6}
-        daysLeft={4}
-      />
-
       <View style={styles.highlightContainer}>
-        <StatusCard
-          type="highlight"
-          message="You’re almost at your target"
-          subtitle="Finish Strong, Samuel"
-          
-        />
-      </View>
+        <ProgressCard completedDays={4} totalDays={7} />
+        <MotivationCard  />
+       </View>
+
 
       <View style={styles.row}>
         <StatusCard label="Meals taken today" value="2/3" icon={<MaterialIcons name="no-meals" size={22} color="#666" />} />
