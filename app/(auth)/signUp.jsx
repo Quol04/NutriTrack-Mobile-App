@@ -54,7 +54,7 @@ export default function SignupScreen() {
     try {
       const message = await registerUser(name, email, password);
       Alert.alert("Success", message || "Registration successful!");
-      console.log("Registration successful:", message);
+      // console.log("Registration successful:", message);
       // navigate to login using expo-router
       router.replace('./login');
     } catch (err) {
