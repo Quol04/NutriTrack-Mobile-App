@@ -12,15 +12,14 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import { TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { loginUser } from "./auth";
+import LoginInputs from "@/components/common/LoginInputs";
 
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -28,7 +27,7 @@ export default function LoginScreen() {
     try {
       setLoading(true);
       const token = await loginUser(email, password);
-      Alert.alert("Success", "Login successful!");
+      // Alert.alert("Success", "Login successful!");
       router.replace('/(home)');
     } catch (err) {
       // err may be a string message from the API helper
@@ -54,67 +53,17 @@ export default function LoginScreen() {
             </View>
 
             {/* Input Fields */}
-            <View style={styles.inputContainer}>
-              <TextInput
-                label="Email or Phone Number"
-                mode="outlined"
-                value={email}
-                onChangeText={setEmail}
-                placeholder="Johndoe@gmail.com"
-                left={<TextInput.Icon icon="email-outline"  />}
-                style={styles.input}
-                editable={!loading}
-                theme={{
-                      colors: {
-                        text: "#fff",             // typed text
-                        placeholder: "#aaa",      // placeholder text
-                        primary: "#fff",          // focused outline color
-                        outline: "#888",          // unfocused outline
-                        background: "#fff" // transparent background
-                      },
-                    }}
-                    placeholderTextColor="#fff"
-                
-                // {{ colors: { text: "#fff", placeholder: "#aaa" } }}
-              />
-
-              <TextInput
-                label="Password"
-                mode="outlined"
-                value={password}
-                onChangeText={setPassword}
-                placeholder="********"
-                secureTextEntry={!showPassword}
-                left={<TextInput.Icon icon="lock-outline" />}
-                right={
-                  <TextInput.Icon
-                    icon={showPassword ? "eye-off-outline" : "eye-outline"}
-                    onPress={() => setShowPassword(!showPassword)}
-                  />
-                }
-                style={styles.input}
-                editable={!loading}
-                theme={{
-                      colors: {
-                        text: "#fff",             // typed text
-                        placeholder: "#aaa",      // placeholder text
-                        primary: "#fff",          // focused outline color
-                        outline: "#888",          // unfocused outline
-                        background: "transparent" // transparent background
-                      },
-                    }}
-                    placeholderTextColor="#aaa"
-
-
-                // {{ colors: { text: "#fff", placeholder: "#fff" } }}
-              />
-
-              <TouchableOpacity>
-                <Text style={styles.resetText}>Forgot password? Reset here</Text>
-              </TouchableOpacity>
-            </View>
-
-            {/* Login Button */}
+            <LoginInputs
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+            />
+            <TouchableOpacity>
+              <Text style={styles.resetText}>Forgot password? Reset here</Text>
+            </TouchableOpacity>
+    
+          {/* Login Button */}
           
             <TouchableOpacity
               style={[styles.loginButton, loading ? styles.loginButtonDisabled : null]}
@@ -170,19 +119,12 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "600",
   },
-  inputContainer: {
-    width: "100%",
-    marginBottom: 30,
-  },
-  input: {
-    backgroundColor: "#222",
-    marginBottom: 15,
-    color: "#fff",
-  },
+
   resetText: {
     color: "#ccc",
     textAlign: "right",
     fontSize: 13,
+    marginBottom: 20,
   },
   loginButton: {
     width: "100%",
@@ -200,6 +142,7 @@ const styles = StyleSheet.create({
   signupText: {
     color: "#fff",
     fontSize: 14,
+    textAlign: "center",
   },
   signupLink: {
     color: "#FFEFE7",

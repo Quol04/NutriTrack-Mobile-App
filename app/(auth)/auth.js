@@ -27,12 +27,24 @@ export const loginUser = async (email, password) => {
     await AsyncStorage.setItem("token", token);
     return token;
   } catch (error) {
-    // error logged for developer in earlier iteration; removed verbose log
+    // Log response details to help debugging (safe for dev; remove/adjust in prod)
+    try {
+      // eslint-disable-next-line no-console
+      console.error("loginUser error:", {
+        status: error?.response?.status,
+        data: error?.response?.data,
+        message: error?.message,
+      });
+    } catch (e) {
+      // ignore logging errors
+    }
+
     const msg =
       error?.response?.data?.message ||
       error?.response?.data ||
       error?.message ||
       "Login failed";
+
     throw msg;
   }
 };

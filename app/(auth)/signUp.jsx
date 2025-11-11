@@ -14,6 +14,7 @@ import {
 import { Button, TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { registerUser } from "./auth";
+import SignupInputs from "@/components/common/SignupInputs";
 // import axios from "axios";
 
 
@@ -23,10 +24,11 @@ export default function SignupScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
+  // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  
 
   const validateEmail = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -63,15 +65,6 @@ export default function SignupScreen() {
     }
   };
 
-   
-
-    // if (Object.keys(newErrors).length === 0) {
-    //   // All checks passed
-    //   Alert.alert("Signup Successful!", "Welcome to NutriTrack 🎉");
-    //   // navigation.navigate("Login"); // Uncomment when connected to backend or real navigation flow
-    // }
-
-  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -83,82 +76,24 @@ export default function SignupScreen() {
               <Text style={styles.logoSymbol}>⧉</Text>
               <Text style={styles.logoText}>NutriTrack</Text>
             </View>
+            
 
             {/* Input Fields */}
-            <View style={styles.inputContainer}>
-              {/* Username */}
-              <TextInput
-                label="Username"
-                mode="outlined"
-                value={name}
-                onChangeText={setName}
-                placeholder="Johndoe"
-                left={<TextInput.Icon icon="account-outline" />}
-                style={styles.input}
-                theme={{ colors: { text: "#fff", placeholder: "#fff" } }}
-              />
-              {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
 
-              {/* Email */}
-              <TextInput
-                label="Email or Phone Number"
-                mode="outlined"
-                value={email}
-                onChangeText={setEmail}
-                placeholder="Johndoe@gmail.com"
-                left={<TextInput.Icon icon="email-outline" />}
-                style={styles.input}
-                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
-              />
-              {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
-
-              {/* Password */}
-              <TextInput
-                label="Password"
-                mode="outlined"
-                value={password}
-                onChangeText={setPassword}
-                placeholder="********"
-                secureTextEntry={!showPassword}
-                left={<TextInput.Icon icon="lock-outline" />}
-                right={
-                  <TextInput.Icon
-                    icon={showPassword ? "eye-off-outline" : "eye-outline"}
-                    onPress={() => setShowPassword(!showPassword)}
-                  />
-                }
-                style={styles.input}
-                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
-              />
-              {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
-
-              {/* Confirm Password */}
-              <TextInput
-                label="Confirm Password"
-                mode="outlined"
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
-                placeholder="********"
-                secureTextEntry={!showConfirmPassword}
-                left={<TextInput.Icon icon="lock-outline" />}
-                right={
-                  <TextInput.Icon
-                    icon={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
-                    onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-                  />
-                }
-                style={styles.input}
-                theme={{ colors: { text: "#fff", placeholder: "#aaa" } }}
-              />
-              {errors.confirmPassword && (
-                <Text style={styles.errorText}>{errors.confirmPassword}</Text>
-              )}
-
-              <TouchableOpacity>
-                <Text style={styles.resetText}>Forgot password? Reset here</Text>
-              </TouchableOpacity>
-            </View>
-
+            <SignupInputs
+              name={name}
+              setName={setName}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              confirmPassword={confirmPassword}
+              setConfirmPassword={setConfirmPassword}
+            />
+            <TouchableOpacity>
+              <Text style={styles.resetText}>Forgot password? Reset here</Text>
+            </TouchableOpacity>
+           
             {/* Signup Button */}
             <Button
               mode="contained"
@@ -177,7 +112,7 @@ export default function SignupScreen() {
                 style={styles.loginLink}
                 onPress={() => router.push('/(auth)/login')}
               >
-                Sign in here
+                Log in here
               </Text>
             </Text>
         
@@ -228,6 +163,7 @@ const styles = StyleSheet.create({
     textAlign: "right",
     fontSize: 13,
     marginTop: 5,
+    marginBottom: 20,
   },
   signupButton: {
     width: "100%",
@@ -238,10 +174,12 @@ const styles = StyleSheet.create({
   loginText: {
     color: "#fff",
     fontSize: 14,
+    textAlign: "center",
   },
   loginLink: {
     color: "#FFEFE7",
     textDecorationLine: "underline",
+    
   },
   errorText: {
     color: "#ff7070",
